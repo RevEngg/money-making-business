@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "262880979132",
+    "firebase_url": "https://e-learning-jain.firebaseio.com",
+    "project_id": "e-learning-jain",
+    "storage_bucket": "e-learning-jain.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262880979132:android:20ff1eb329bc7e461008b9",
+        "android_client_info": {
+          "package_name": "com.team.projectlearning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262880979132-pfv8acfia1lduhjspg2ob09c7udf4s61.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team.projectlearning",
+            "certificate_hash": "32687916e442541ae27ced451d0eaafde006ee07"
+          }
+        },
+        {
+          "client_id": "262880979132-qjtq5cabcb1qo531d2np0b3a0nrho4nb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-NTM3WGE5O8v0qAUrvLvxnETwZcT2hHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "262880979132-qjtq5cabcb1qo531d2np0b3a0nrho4nb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
