@@ -11,8 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ELearnPlatform">
-        <activity android:name=".DashboardActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ClassHomeActivity"></activity>
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
