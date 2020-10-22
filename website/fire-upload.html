@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Firebase Web Basics</title>
+</head>
+<body>
+
+	<div class="mainDiv" align="left">
+		<h1 align="left">Firebase File Upload</h1>
+		<progress id="uploader" value="0" max="100">0%</progress>
+		<input type="file" id="fileButton" value="upload" accept="application/pdf"/>
+	</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
+
+<script>
+  // Initialize Firebase
+  var firebaseConfig = {
+    apiKey: "AIzaSyBNzmtvm9fDhgYxAMnp6y73DBTivM07wYI",
+    authDomain: "e-learning-jain.firebaseapp.com",
+    databaseURL: "https://e-learning-jain.firebaseio.com",
+    projectId: "e-learning-jain",
+    storageBucket: "e-learning-jain.appspot.com",
+    messagingSenderId: "262880979132",
+    appId: "1:262880979132:web:4e6b98a19d5ed2001008b9",
+    measurementId: "G-K2SSR0TK2P"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  //-------------------------------------
+  
+  var uploader = document.getElementById('uploader');
+  var fileButton = document.getElementById('fileButton');
+  fileButton.addEventListener('change', function(e){
+    var file = e.target.files[0];
+    var storageRef = firebase.storage().ref('pdf/'+file.name);
+    var task = storageRef.put(file);
+    task.on('state_changed', function progress(snapshot) {
+        var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+        uploader.value = percentage;
+
+  }, function error(err) {
+
+
+  },function complete() {
+
+  });
+});    
+</script>
+</body>
+</html>
