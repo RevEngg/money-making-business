@@ -58,7 +58,8 @@ class LoginActivity : AppCompatActivity() {
                 if (isNew){
                     val user = hashMapOf(
                         "uid" to auth.uid,
-                        "userName" to auth.currentUser!!.displayName,
+                        "name" to auth.currentUser!!.displayName,
+                        "email" to auth.currentUser!!.email,
                         "imageUrl" to auth.currentUser!!.photoUrl.toString(),
                         "signUpTime" to FieldValue.serverTimestamp(),
                         "signUpTimeStamp" to Date().time

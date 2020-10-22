@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">E-Learn Platform</string>
     <string name="continue_with_google">Continue with Google</string>
-    <string name="welcome">Welcome!</string>
+    <string name="welcome">Welcome to Krakin Plus Ultra!</string>
     <string name="sign_out">Sign out</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="are_you_sure_question">Are you sure?</string>
 </resources>
