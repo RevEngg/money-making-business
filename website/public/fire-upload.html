@@ -55,7 +55,10 @@
           function complete() {
             db.collection("files")
               .add({
-                fileName: file.name
+                fileName: file.name,
+                fileSize: e.target.files[0].size,
+                fileType: e.target.files[0].type
+                
               })
               .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
