@@ -53,12 +53,14 @@
           },
           function error(err) {},
           function complete() {
-            db.collection("files")
+            task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+              db.collection("files")
               .add({
                 fileName: file.name,
                 fileSize: e.target.files[0].size,
-                fileType: e.target.files[0].type
-                
+                fileType: e.target.files[0].type,
+                downloadUrl: downloadURL,
+                uploadTime: firebase.firestore.FieldValue.serverTimestamp()
               })
               .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
@@ -66,9 +68,9 @@
               .catch(function (error) {
                 console.error("Error adding document: ", error);
               });
-          }
-        );
-      });
+            });
+          });
+        });
     </script>
   </body>
 </html>
