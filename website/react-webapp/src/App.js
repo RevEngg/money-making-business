@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import React, { useState, useEffect } from "react";
-import fire from "./fire";
+import firebase from "./fire";
 import Login from "./Login";
 import Hero from "./Hero";
 import "./App.css";
@@ -25,7 +25,7 @@ const App = () => {
 
   const handleLogin = () => {
     clearErrors();
-    fire
+    firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .catch((err) => {
@@ -44,11 +44,11 @@ const App = () => {
       });
   };
   const handleLogout = () => {
-    fire.auth().signOut();
+    firebase.auth().signOut();
   };
 
   const authListener = () => {
-    fire.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         clearInputs();
         setUser(user);

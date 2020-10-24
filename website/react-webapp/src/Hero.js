@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import fire from "./fire";
+import firebase from "./fire";
 
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
@@ -17,10 +17,10 @@ export default function AlertDialog() {
   };
 
   const handleLogout = () => {
-    fire.auth().signOut();
+    firebase.auth().signOut();
   };
 
-  const user = fire.auth().currentUser;
+  const user = firebase.auth().currentUser;
   user.providerData.forEach((userInfo) => {
     console.log("User info for provider: ", userInfo);
   });
