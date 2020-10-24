@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import firebase from "./fire";
+import storage from "./fire"
 
-export default function AlertDialog() {
+export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const onChange = (e) => {
+      const file = e.target.files[0];
+      const uploadTask = firebase.storage().ref().child(file.name).put(file);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+            firebase.storage()
+            .ref()
+            .child(file.name)
+            .getDownloadURL()
+            .then(url => {
+              console.log(url)
+            });
+        }
+      );
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -22,7 +50,6 @@ export default function AlertDialog() {
 
   const user = firebase.auth().currentUser;
   user.providerData.forEach((userInfo) => {
-    console.log("User info for provider: ", userInfo);
   });
 
   return (
@@ -34,7 +61,11 @@ export default function AlertDialog() {
             Logout
           </Button>
         </nav>
+        <input type="file" onChange={onChange}/>
+        <progress value={progress} max="100" />
       </section>
+
+      
 
       <Dialog
         open={open}
