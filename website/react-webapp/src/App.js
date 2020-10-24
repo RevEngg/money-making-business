@@ -1,27 +1,27 @@
 //import logo from './logo.svg';
 import React, { useState, useEffect } from "react";
-import fire from './fire';
-import Login from './Login';
-import Hero from './Hero';
-import './App.css';
+import fire from "./fire";
+import Login from "./Login";
+import Hero from "./Hero";
+import "./App.css";
 
 const App = () => {
-  const [user, setUser] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [hasAccount, setHasAccount] = useState('false');
+  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [hasAccount, setHasAccount] = useState("false");
 
   const clearInputs = () => {
-    setEmail('');
-    setPassword('');
-  }
+    setEmail("");
+    setPassword("");
+  };
 
   const clearErrors = () => {
-    setEmailError('');
-    setPasswordError('');
-  }
+    setEmailError("");
+    setPasswordError("");
+  };
 
   const handleLogin = () => {
     clearErrors();
@@ -39,34 +39,10 @@ const App = () => {
             setPasswordError(err.message);
             break;
           default:
-            //nothing
-        }
-        
-      });
-
-  };
-
-  const handleSignup = () => {
-    clearErrors();
-    fire
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .catch((err) => {
-      switch (err.code) {
-        case "auth/email-already-in-use":
-        case "auth/invalid-email":
-          setEmailError(err.message)
-          break;
-        case "auth/weak-password":
-          setPasswordError(err.message);
-          break;
-        default:
           //nothing
-      }
-      
-    });
+        }
+      });
   };
-
   const handleLogout = () => {
     fire.auth().signOut();
   };
@@ -92,20 +68,18 @@ const App = () => {
       {user ? (
         <Hero handleLogout={handleLogout} />
       ) : (
-        <Login 
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        handleLogin={handleLogin}
-        handleSignup={handleSignup}
-        hasAccount={hasAccount}
-        setHasAccount={setHasAccount}
-        emailError={emailError}
-        passwordError={passwordError}
+        <Login
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          handleLogin={handleLogin}
+          hasAccount={hasAccount}
+          setHasAccount={setHasAccount}
+          emailError={emailError}
+          passwordError={passwordError}
         />
       )}
-
     </div>
   );
 };
