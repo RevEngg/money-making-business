@@ -11,6 +11,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import firebase from "./fire";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +35,21 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const [progress, setProgress] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [semester, setSemester] = React.useState("");
+  const [fileCategory, setCategory] = React.useState("");
+  const [fileClass, setClass] = React.useState("");
+
+  const handleSemesterChange = (event) => {
+    setSemester(event.target.value);
+  };
+
+  const handleClassChange = (event) => {
+    setClass(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
 
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -110,6 +128,54 @@ export default function Dashboard() {
       </AppBar>
       <input type="file" onChange={onChange} />
       <progress value={progress} max="100" />
+
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Semester</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={semester}
+          onChange={handleSemesterChange}
+        >
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+          <MenuItem value={6}>6</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Category</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={fileCategory}
+          onChange={handleCategoryChange}
+        >
+          <MenuItem value={"Notes"}>Notes</MenuItem>
+          <MenuItem value={"Question Papers"}>Question Papers</MenuItem>
+          <MenuItem value={"Syllabus"}>Syllabus</MenuItem>
+          <MenuItem value={"Lab"}>Lab</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Class</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={fileClass}
+          onChange={handleClassChange}
+        >
+          <MenuItem value={"MACT"}>MACT</MenuItem>
+          <MenuItem value={"ISMA"}>ISMA</MenuItem>
+          <MenuItem value={"CTIS"}>CTIS</MenuItem>
+          <MenuItem value={"DA"}>DA</MenuItem>
+          <MenuItem value={"General"}>General</MenuItem>
+        </Select>
+      </FormControl>
 
       <Dialog
         open={open}
