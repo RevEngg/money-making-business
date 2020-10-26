@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     paddingTop: theme.spacing(1),
   },
+  formControl: {
+    margin: theme.spacing(2),
+    minWidth: 120,
+  },
 }));
 
 export default function Dashboard() {
@@ -128,7 +132,7 @@ export default function Dashboard() {
       </AppBar>
       <input type="file" onChange={onChange} />
       <progress value={progress} max="100" />
-
+      
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Semester</InputLabel>
         <Select
@@ -170,6 +174,7 @@ export default function Dashboard() {
           onChange={handleClassChange}
         >
           <MenuItem value={"MACT"}>MACT</MenuItem>
+          <MenuItem value={"IOT"}>IOT</MenuItem>
           <MenuItem value={"ISMA"}>ISMA</MenuItem>
           <MenuItem value={"CTIS"}>CTIS</MenuItem>
           <MenuItem value={"DA"}>DA</MenuItem>
