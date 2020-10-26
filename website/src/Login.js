@@ -12,32 +12,31 @@ const Login = (props) => {
   } = props;
 
   return (
-    <section className="login">
-      <div className="loginContainer">
-        <label>Username</label>
-        <input
-          type="text"
-          autoFocus
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <p className="errorMsg">{emailError}</p>
-        <label>Password</label>
-        <input
-          type="password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p className="errorMsg">{passwordError}</p>
-        <div className="btnContainer">
-          {
-            <>
-              <button onClick={handleLogin}>Sign In</button>
-            </>
-          }
-        </div>
+    <section className="login-page">
+      <div className="page">
+          <form id="login" method="get" action="login.php" className="form">
+            <div className="username-text">Email-ID</div>
+            <input
+              type="text"
+              autoFocus
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="username"
+            />
+            <p className="errorMsg">{emailError}</p>
+            <div className="pass-text">Password</div>
+            <input className="pass"
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <p className="errorMsg">{passwordError}</p>
+            <button type="button" onClick={handleLogin} name="log" className="log">
+              LOGIN
+            </button>
+          </form>
       </div>
     </section>
   );

@@ -1,92 +1,97 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   font-family: "Nunito", sans-serif;
 }
 
-.login button {
+.login-page {
+  background-image: url(images/6.jpg);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  text-align: center;
+}
+
+.form {
+  display: inline-block;
+  width: 382px;
+  min-height: 240px;
+  background: #435372ec;
+  padding: 80px;
+  border-radius: 24px;
+  box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.331);
+}
+
+.head {
+  text-align: center;
+  color: #9eafe7;
+  padding: 5px;
+}
+
+.username-text {
+  font-weight: bold;
+  margin-left: 45px;
+  color: #9eafe7;
+  float: left;
+}
+
+.username {
+  width: 300px;
+  height: 30px;
   border: none;
-  outline: none;
-  width: 100%;
-  padding: 15px 0;
-  color: #fff;
-  font-size: 16px;
-  letter-spacing: 1px;
-  background: #603bbb;
-  cursor: pointer;
+  background-color: #eeeeee;
+  border-radius: 3px;
+  padding-left: 8px;
 }
 
-.login {
-  width: 100%;
-  min-height: 100vh;
-  padding: 0 20px;
-  background: #e9e9e9;
-  display: flex;
+.pass-text {
+  font-weight: bold;
+  margin-left: 45px;
+  color: #9eafe7;
+  float: left;
 }
 
-.login .loginContainer {
-  padding: 60px;
-  margin: auto;
-  width: 100%;
-  max-width: 520px;
-  min-height: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: radial-gradient(
-    ellipse at left bottom,
-    rgba(22, 24, 47, 1) 0%,
-    rgba(38, 20, 72, 0.9) 59%,
-    rgba(17, 27, 75, 0.9) 100%
-  );
-  box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
-}
-
-.login .loginContainer label {
-  color: white;
-  margin: 14px 0;
-  display: block;
-  font-size: 22px;
-  line-height: 1;
-}
-
-.login .loginContainer input {
-  width: 100%;
+.pass {
+  width: 300px;
+  height: 30px;
   border: none;
-  outline: none;
-  font-size: 19px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  letter-spacing: 1px;
+  background-color: #eeeeee;
+  border-radius: 3px;
+  padding-left: 8px;
+  color: #9ba4b4;
 }
 
-.login .loginContainer .btnContainer {
-  width: 100%;
-  padding: 24px 0;
+.log {
+  width: 160px;
+  height: 35px;
+  font-weight: bold;
+  margin-top: 10px;
+  border: none;
+  border-radius: 17px;
+  padding-left: 7px;
+  color: rgb(56, 56, 56);
+  background-color: #9eafe7;
+  transition: 0.3s;
 }
 
-.login .loginContainer .btnContainer p {
-  margin: 14px 0 0 0;
-  text-align: right;
-  color: #fff;
+.log:hover {
+  width: 162px;
+  height: 36px;
+  background-color: #93a2d6;
+  box-shadow: 2px 2px 25px rgba(0, 0, 0, 0.158);
+  transition: 0.3s;
 }
 
-.login .loginContainer .btnContainer p span {
-  color: yellow;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  margin-left: 5px;
-  cursor: pointer;
-  transition: all 400ms ease-in-out;
+a {
+  color: #d1d1d1;
+  font-size: 15px;
+  bottom: 50px;
+  transition: 0.3s;
+  margin-left: 10px;
 }
 
-.login .loginContainer .btnContainer p span:hover {
-  color: red;
-}
-
-.login .loginContainer .errorMsg {
-  color: red;
+a:hover {
+  color: #5f91bc;
   font-size: 16px;
+  transition: 0.3s;
 }
