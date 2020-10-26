@@ -43,6 +43,7 @@ export default function Dashboard() {
   const [semester, setSemester] = React.useState("");
   const [fileCategory, setCategory] = React.useState("");
   const [fileClass, setClass] = React.useState("");
+  const [subject, setSubject] = React.useState("");
 
   const handleSemesterChange = (event) => {
     setSemester(event.target.value);
@@ -50,6 +51,10 @@ export default function Dashboard() {
 
   const handleClassChange = (event) => {
     setClass(event.target.value);
+  };
+
+  const handleSubjectChange = (event) => {
+    setSubject(event.target.value);
   };
 
   const handleCategoryChange = (event) => {
@@ -135,6 +140,23 @@ export default function Dashboard() {
       <progress value={progress} max="100" />
       
       <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Class</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={fileClass}
+          onChange={handleClassChange}
+        >
+          <MenuItem value={"MACT"}>MACT</MenuItem>
+          <MenuItem value={"IOT"}>IOT</MenuItem>
+          <MenuItem value={"ISMA"}>ISMA</MenuItem>
+          <MenuItem value={"CTIS"}>CTIS</MenuItem>
+          <MenuItem value={"DA"}>DA</MenuItem>
+          <MenuItem value={"General"}>General</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Semester</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -152,6 +174,23 @@ export default function Dashboard() {
       </FormControl>
 
       <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Subject</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={subject}
+          onChange={handleSubjectChange}
+        >
+          <MenuItem value={"Sub 1"}>Sub 1</MenuItem>
+          <MenuItem value={"Sub 2"}>Sub 2</MenuItem>
+          <MenuItem value={"Sub 3"}>Sub 3</MenuItem>
+          <MenuItem value={"Sub 4"}>Sub 4</MenuItem>
+          <MenuItem value={"Sub 5"}>Sub 5</MenuItem>
+          <MenuItem value={"Sub 6"}>Sub 6</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Category</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -163,23 +202,6 @@ export default function Dashboard() {
           <MenuItem value={"Question Papers"}>Question Papers</MenuItem>
           <MenuItem value={"Syllabus"}>Syllabus</MenuItem>
           <MenuItem value={"Lab"}>Lab</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Class</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={fileClass}
-          onChange={handleClassChange}
-        >
-          <MenuItem value={"MACT"}>MACT</MenuItem>
-          <MenuItem value={"IOT"}>IOT</MenuItem>
-          <MenuItem value={"ISMA"}>ISMA</MenuItem>
-          <MenuItem value={"CTIS"}>CTIS</MenuItem>
-          <MenuItem value={"DA"}>DA</MenuItem>
-          <MenuItem value={"General"}>General</MenuItem>
         </Select>
       </FormControl>
 
