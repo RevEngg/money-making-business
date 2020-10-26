@@ -3,11 +3,43 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MoreIcon from "@material-ui/icons/MoreVert";
 import firebase from "./fire";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  toolbar: {
+    alignItems: "flex-start",
+    paddingTop: theme.spacing(1),
+  },
+  title: {
+    flexGrow: 1,
+    paddingTop: theme.spacing(1),
+  },
+}));
+
 export default function Dashboard() {
+  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [progress, setProgress] = useState(0);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const onChange = (e) => {
     const file = e.target.files[0];
@@ -58,20 +90,26 @@ export default function Dashboard() {
   };
 
   const user = firebase.auth().currentUser;
-  user.providerData.forEach((userInfo) => {});
 
   return (
     <div>
-      <section className="hero">
-        <nav>
-          <h2>Welcome {user.email}!</h2>
-          <Button onClick={handleClickOpen} disableElevation>
-            Logout
-          </Button>
-        </nav>
-        <input type="file" onChange={onChange} />
-        <progress value={progress} max="100" />
-      </section>
+      <AppBar position="static">
+        <Toolbar className={classes.toolbar}>
+          <Typography className={classes.title} variant="h5">
+            Welcome {user.email}!
+          </Typography>
+          <IconButton
+            aria-label="display more actions"
+            edge="end"
+            color="inherit"
+            onClick={handleMenuClick}
+          >
+            <MoreIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <input type="file" onChange={onChange} />
+      <progress value={progress} max="100" />
 
       <Dialog
         open={open}
@@ -89,6 +127,16 @@ export default function Dashboard() {
           </Button>
         </DialogActions>
       </Dialog>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleMenuClose}>Add another teacher</MenuItem>
+        <MenuItem onClick={handleClickOpen}>Logout</MenuItem>
+      </Menu>
     </div>
   );
 }
