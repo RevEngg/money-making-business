@@ -15,4 +15,4 @@
 local.properties
 release
 .idea
-website/.firebase
+*.cache
