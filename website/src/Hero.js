@@ -44,6 +44,7 @@ export default function Dashboard() {
   const [fileCategory, setCategory] = React.useState("");
   const [fileClass, setClass] = React.useState("");
   const [subject, setSubject] = React.useState("");
+  const [notesAsFile, setNotesAsFile] = React.useState("");
 
   const handleSemesterChange = (event) => {
     setSemester(event.target.value);
@@ -69,9 +70,15 @@ export default function Dashboard() {
     setAnchorEl(null);
   };
 
+  const handleFileSelect = (e) => {
+    // eslint-disable-next-line
+    const file = e.target.files[0]
+    setNotesAsFile(notesFile => (file))
+  }
+
   const onChange = (e) => {
-    const file = e.target.files[0];
-    const uploadTask = firebase.storage().ref().child(file.name).put(file);
+    //const file = e.target.files[0];
+    const uploadTask = firebase.storage().ref().child(notesAsFile.name).put(notesAsFile);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -85,7 +92,7 @@ export default function Dashboard() {
         firebase
           .storage()
           .ref()
-          .child(file.name)
+          .child(notesAsFile.name)
           .getDownloadURL()
           .then((url) => {
             firebase
@@ -94,9 +101,9 @@ export default function Dashboard() {
               .doc()
               .set({
                 downloadUrl: url,
-                fileName: e.target.files[0].name,
-                fileSize: e.target.files[0].size,
-                fileType: e.target.files[0].type,
+                fileName: notesAsFile.name,
+                fileSize: notesAsFile.size,
+                fileType: notesAsFile.type,
                 uploadTime: firebase.firestore.FieldValue.serverTimestamp(),
               })
               .catch((err) => {});
@@ -136,7 +143,8 @@ export default function Dashboard() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <input type="file" onChange={onChange} />
+      <input type="file" onChange={handleFileSelect} />
+      <button onClick={onChange}>Upload</button>
       <progress value={progress} max="100" />
       
       <FormControl className={classes.formControl}>
