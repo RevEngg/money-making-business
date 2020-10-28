@@ -144,7 +144,7 @@ export default function Dashboard() {
         </Toolbar>
       </AppBar>
       <input type="file" onChange={handleFileSelect} />
-      <button onClick={onChange}>Upload</button>
+      <button onClick={onChange} disabled={notesAsFile<1}>Upload</button>
       <progress value={progress} max="100" />
       
       <FormControl className={classes.formControl}>
