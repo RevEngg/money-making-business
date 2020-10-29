@@ -78,7 +78,7 @@ export default function Dashboard() {
 
   const onChange = (e) => {
     //const file = e.target.files[0];
-    const uploadTask = firebase.storage().ref().child(notesAsFile.name).put(notesAsFile);
+    const uploadTask = firebase.storage().ref().child(`${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}`).put(notesAsFile);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -100,6 +100,10 @@ export default function Dashboard() {
               .collection("files")
               .doc()
               .set({
+                semester: semester,
+                class: fileClass,
+                category: fileCategory,
+                subject: subject,
                 downloadUrl: url,
                 fileName: notesAsFile.name,
                 fileSize: notesAsFile.size,
