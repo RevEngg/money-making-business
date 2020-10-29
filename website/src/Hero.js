@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(2),
     minWidth: 150,
-
   },
 }));
 
@@ -71,14 +70,16 @@ export default function Dashboard() {
   };
 
   const handleFileSelect = (e) => {
-    // eslint-disable-next-line
-    const file = e.target.files[0]
-    setNotesAsFile(notesFile => (file))
-  }
+    const file = e.target.files[0];
+    setNotesAsFile((notesFile) => file);
+  };
 
-  const onChange = (e) => {
-    //const file = e.target.files[0];
-    const uploadTask = firebase.storage().ref().child(`${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}`).put(notesAsFile);
+  const uploadFileTask = () => {
+    const uploadTask = firebase
+      .storage()
+      .ref()
+      .child(`jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`)
+      .put(notesAsFile);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -87,12 +88,11 @@ export default function Dashboard() {
         );
         setProgress(progress);
       },
-      (error) => {},
       () => {
         firebase
           .storage()
           .ref()
-          .child(notesAsFile.name)
+          .child(`jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`)
           .getDownloadURL()
           .then((url) => {
             firebase
@@ -100,6 +100,9 @@ export default function Dashboard() {
               .collection("files")
               .doc()
               .set({
+                college: "Jain University",
+                degree: "BCA",
+                collegeId: "jain_university_jayanagar",
                 semester: semester,
                 class: fileClass,
                 category: fileCategory,
@@ -110,7 +113,6 @@ export default function Dashboard() {
                 fileType: notesAsFile.type,
                 uploadTime: firebase.firestore.FieldValue.serverTimestamp(),
               })
-              .catch((err) => {});
           });
       }
     );
@@ -148,9 +150,11 @@ export default function Dashboard() {
         </Toolbar>
       </AppBar>
       <input type="file" onChange={handleFileSelect} />
-      <button onClick={onChange} disabled={notesAsFile<1}>Upload</button>
+      <button onClick={uploadFileTask} disabled={notesAsFile < 1}>
+        Upload
+      </button>
       <progress value={progress} max="100" />
-      
+
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Class</InputLabel>
         <Select
