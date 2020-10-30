@@ -13,8 +13,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert  from '@material-ui/lab/Alert';
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import Select from "@material-ui/core/Select";
 import firebase from "./fire";
 
@@ -25,7 +25,6 @@ function Alert(props) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    
   },
   toolbar: {
     alignItems: "flex-start",
@@ -78,11 +77,11 @@ export default function Dashboard() {
   };
 
   const handleSuccessSnackbarClose = (reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setSnackbarOpen(false);
-  }
+  };
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
@@ -90,44 +89,40 @@ export default function Dashboard() {
   };
 
   const uploadFileTask = () => {
-    if(notesAsFile.size > 10485760) {
+    if (notesAsFile.size > 10485760) {
       alert("File size must be under 10MB");
       return;
     } else {
       const uploadTask = firebase
-      .storage()
-      .ref()
-      .child(
-        `jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`
-      )
-      .put(notesAsFile);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        setProgress(0);
-        setSnackbarOpen(true);
-        firebase
-          .storage()
-          .ref()
-          .child(
-            `jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`
-          )
-          .getDownloadURL()
-          .then((url) => {
-            firebase
-              .firestore()
-              .collection("files")
-              .doc()
-              .set({
+        .storage()
+        .ref()
+        .child(
+          `jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`
+        )
+        .put(notesAsFile);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          setProgress(0);
+          setSnackbarOpen(true);
+          firebase
+            .storage()
+            .ref()
+            .child(
+              `jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`
+            )
+            .getDownloadURL()
+            .then((url) => {
+              firebase.firestore().collection("files").doc().set({
                 college: "Jain University",
                 degree: "BCA",
                 collegeId: "jain_university_jayanagar",
@@ -140,13 +135,10 @@ export default function Dashboard() {
                 fileSize: notesAsFile.size,
                 fileType: notesAsFile.type,
                 uploadTime: firebase.firestore.FieldValue.serverTimestamp(),
-              })
-              .catch((err) => {
-                console.log(err);
               });
-          });
-      }
-    );
+            });
+        }
+      );
     }
   };
 
@@ -197,10 +189,6 @@ export default function Dashboard() {
         >
           <MenuItem value={"MACT"}>MACT</MenuItem>
           <MenuItem value={"IOT"}>IOT</MenuItem>
-          <MenuItem value={"ISMA"}>ISMA</MenuItem>
-          <MenuItem value={"CTIS"}>CTIS</MenuItem>
-          <MenuItem value={"DA"}>DA</MenuItem>
-          <MenuItem value={"General"}>General</MenuItem>
         </Select>
       </FormControl>
 
@@ -212,10 +200,6 @@ export default function Dashboard() {
           value={semester}
           onChange={handleSemesterChange}
         >
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
-          <MenuItem value={4}>4</MenuItem>
           <MenuItem value={5}>5</MenuItem>
           <MenuItem value={6}>6</MenuItem>
         </Select>
@@ -229,12 +213,12 @@ export default function Dashboard() {
           value={subject}
           onChange={handleSubjectChange}
         >
-          <MenuItem value={"Sub 1"}>Sub 1</MenuItem>
-          <MenuItem value={"Sub 2"}>Sub 2</MenuItem>
-          <MenuItem value={"Sub 3"}>Sub 3</MenuItem>
-          <MenuItem value={"Sub 4"}>Sub 4</MenuItem>
-          <MenuItem value={"Sub 5"}>Sub 5</MenuItem>
-          <MenuItem value={"Sub 6"}>Sub 6</MenuItem>
+          <MenuItem value={"Sub 1"}>RIMS</MenuItem>
+          <MenuItem value={"Sub 2"}>SE</MenuItem>
+          <MenuItem value={"Sub 3"}>EVS</MenuItem>
+          <MenuItem value={"Sub 4"}>IOSE</MenuItem>
+          <MenuItem value={"Sub 5"}>MDC</MenuItem>
+          <MenuItem value={"Sub 6"}>Aptitude</MenuItem>
         </Select>
       </FormControl>
 
@@ -269,7 +253,11 @@ export default function Dashboard() {
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={handleSuccessSnackbarClose}>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSuccessSnackbarClose}
+      >
         <Alert onClose={handleSuccessSnackbarClose} severity="success">
           File Uploaded Successfully!
         </Alert>
