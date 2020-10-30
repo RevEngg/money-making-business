@@ -75,10 +75,16 @@ export default function Dashboard() {
   };
 
   const uploadFileTask = () => {
-    const uploadTask = firebase
+    if(notesAsFile.size > 10485760) {
+      alert("File size must be under 10MB");
+      return;
+    } else {
+      const uploadTask = firebase
       .storage()
       .ref()
-      .child(`jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`)
+      .child(
+        `jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`
+      )
       .put(notesAsFile);
     uploadTask.on(
       "state_changed",
@@ -88,11 +94,16 @@ export default function Dashboard() {
         );
         setProgress(progress);
       },
+      (error) => {
+        console.log(error);
+      },
       () => {
         firebase
           .storage()
           .ref()
-          .child(`jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`)
+          .child(
+            `jain_university_jayanagar/bca/${semester}/${fileClass}/${subject}/${fileCategory}${notesAsFile.name}${notesAsFile.name}`
+          )
           .getDownloadURL()
           .then((url) => {
             firebase
@@ -113,9 +124,13 @@ export default function Dashboard() {
                 fileType: notesAsFile.type,
                 uploadTime: firebase.firestore.FieldValue.serverTimestamp(),
               })
+              .catch((err) => {
+                console.log(err);
+              });
           });
       }
     );
+    }
   };
 
   const handleClickOpen = () => {
@@ -149,7 +164,7 @@ export default function Dashboard() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <input type="file" onChange={handleFileSelect} />
+      <input type="file" id="fileInput" onChange={handleFileSelect} />
       <button onClick={uploadFileTask} disabled={notesAsFile < 1}>
         Upload
       </button>
