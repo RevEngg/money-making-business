@@ -88,6 +88,21 @@ export default function Dashboard() {
     setNotesAsFile((notesFile) => file);
   };
 
+  const isDisabled = () => {
+    if (
+      semester == "" ||
+      fileClass == "" ||
+      fileCategory == "" ||
+      subject == "" ||
+      fileClass == "" ||
+      notesAsFile < 1
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const uploadFileTask = () => {
     if (notesAsFile.size > 10485760) {
       alert("File size must be under 10MB");
@@ -174,7 +189,7 @@ export default function Dashboard() {
         </Toolbar>
       </AppBar>
       <input type="file" id="fileInput" onChange={handleFileSelect} />
-      <button onClick={uploadFileTask} disabled={notesAsFile < 1}>
+      <button onClick={uploadFileTask} disabled={isDisabled()}>
         Upload
       </button>
       <progress value={progress} max="100" />
