@@ -13,12 +13,19 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert  from '@material-ui/lab/Alert';
 import Select from "@material-ui/core/Select";
 import firebase from "./fire";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    
   },
   toolbar: {
     alignItems: "flex-start",
@@ -37,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
   const [progress, setProgress] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [semester, setSemester] = React.useState("");
@@ -69,6 +77,13 @@ export default function Dashboard() {
     setAnchorEl(null);
   };
 
+  const handleSuccessSnackbarClose = (reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
+  }
+
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
     setNotesAsFile((notesFile) => file);
@@ -98,6 +113,8 @@ export default function Dashboard() {
         console.log(error);
       },
       () => {
+        setProgress(0);
+        setSnackbarOpen(true);
         firebase
           .storage()
           .ref()
@@ -252,6 +269,11 @@ export default function Dashboard() {
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={handleSuccessSnackbarClose}>
+        <Alert onClose={handleSuccessSnackbarClose} severity="success">
+          File Uploaded Successfully!
+        </Alert>
+      </Snackbar>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
