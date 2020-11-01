@@ -1,4 +1,5 @@
 import React from "react";
+import loginImage from "./images/4.png";
 
 const Login = (props) => {
   const {
@@ -15,6 +16,9 @@ const Login = (props) => {
     <section className="login-page">
       <div className="page">
           <form id="login" method="get" action="login.php" className="form">
+            <div >
+            <img src={loginImage} alt="this is car image" className="image" />
+            </div>
             <div className="username-text">Email-ID</div>
             <input
               type="text"

@@ -9,18 +9,25 @@
   height: 100%;
   background-size: cover;
   text-align: center;
+  
+  
 }
 
 .form {
   display: inline-block;
-  width: 382px;
+  text-align: center;
+  margin-top: 100px;
+  width: 350px;
   min-height: 240px;
   background: #435372ec;
-  padding: 80px;
+  padding: 30px;
   border-radius: 24px;
   box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.331);
 }
-
+.image{
+  width: 180px;  
+  height: 100%;  
+}
 .head {
   text-align: center;
   color: #9eafe7;
@@ -33,7 +40,9 @@
   color: #9eafe7;
   float: left;
 }
-
+.page{
+  align-self: center;
+}
 .username {
   width: 300px;
   height: 30px;
