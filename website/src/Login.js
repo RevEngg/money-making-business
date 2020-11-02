@@ -17,7 +17,7 @@ const Login = (props) => {
       <div className="page">
           <form id="login" method="get" action="login.php" className="form">
             <div >
-            <img src={loginImage} alt="this is car image" className="image" />
+            <img src={loginImage} alt="this is car" className="image" />
             </div>
             <div className="username-text">Email-ID</div>
             <input

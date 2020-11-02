@@ -90,10 +90,15 @@ export default function Dashboard() {
 
   const isDisabled = () => {
     if (
+      // eslint-disable-next-line
       semester == "" ||
+      // eslint-disable-next-line
       fileClass == "" ||
+      // eslint-disable-next-line
       fileCategory == "" ||
+      // eslint-disable-next-line
       subject == "" ||
+      // eslint-disable-next-line
       fileClass == "" ||
       notesAsFile < 1
     ) {
