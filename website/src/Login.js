@@ -1,6 +1,7 @@
 import { TextField } from "@material-ui/core";
 import React from "react";
 import loginImage from "./images/4.png";
+import Button from '@material-ui/core/Button';
 
 const Login = (props) => {
   const {
@@ -29,9 +30,9 @@ const Login = (props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}/>
             <p className="errorMsg">{passwordError}</p>
-            <button type="button" onClick={handleLogin} name="log" className="log">
+            <Button onClick={handleLogin} name="log" className="log" variant="outlined">
               LOGIN
-            </button>
+            </Button>
           </form>
       </div>
     </section>
