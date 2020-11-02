@@ -1,3 +1,4 @@
+import { TextField } from "@material-ui/core";
 import React from "react";
 import loginImage from "./images/4.png";
 
@@ -19,23 +20,14 @@ const Login = (props) => {
             <div >
             <img src={loginImage} alt="this is car" className="image" />
             </div>
-            <div className="username-text">Email-ID</div>
-            <input
-              type="text"
-              autoFocus
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="username"
-            />
+            <TextField id="uname" label="Email-Id" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)}/>
             <p className="errorMsg">{emailError}</p>
-            <div className="pass-text">Password</div>
-            <input className="pass"
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <TextField id="pass" label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}/>
             <p className="errorMsg">{passwordError}</p>
             <button type="button" onClick={handleLogin} name="log" className="log">
               LOGIN
