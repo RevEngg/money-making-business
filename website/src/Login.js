@@ -2,6 +2,28 @@ import { TextField } from "@material-ui/core";
 import React from "react";
 import loginImage from "./images/4.png";
 import Button from '@material-ui/core/Button';
+import {
+  ThemeProvider,
+  withStyles,
+  createMuiTheme,
+} from '@material-ui/core/styles';
+
+const CssTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'white',
+    },
+  },
+})(TextField);
+
+const theme = createMuiTheme({
+  palette: {
+      type:'dark',
+    },
+});
 
 const Login = (props) => {
   const {
@@ -19,13 +41,14 @@ const Login = (props) => {
       <div className="page">
           <form id="login" method="get" action="login.php" className="form">
             <div >
-            <img src={loginImage} alt="this is car" className="image" />
+            <img src={loginImage} alt="logo will be added here" className="image" />
             </div>
-            <TextField id="uname" label="Email-Id" 
+            <ThemeProvider theme={theme}>
+            <CssTextField id="uname" label="Email-Id" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)}/>
             <p className="errorMsg">{emailError}</p>
-            <TextField id="pass" label="Password"
+            <CssTextField id="pass" label="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}/>
@@ -34,6 +57,7 @@ const Login = (props) => {
             color="primary">
               LOGIN
             </Button>
+            </ThemeProvider>
           </form>
       </div>
     </section>
