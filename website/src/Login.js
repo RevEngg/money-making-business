@@ -44,7 +44,7 @@ const Login = (props) => {
             <img src={loginImage} alt="logo will be added here" className="image" />
             </div>
             <ThemeProvider theme={theme}>
-            <CssTextField id="uname" label="Email-Id" 
+            <CssTextField id="uname" label="Email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)}/>
             <p className="errorMsg">{emailError}</p>
