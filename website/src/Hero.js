@@ -7,7 +7,9 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, 
+createMuiTheme,
+ThemeProvider } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreIcon from "@material-ui/icons/MoreVert";
@@ -17,10 +19,13 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Select from "@material-ui/core/Select";
 import firebase from "./fire";
+import LinearProgress from '@material-ui/core/LinearProgress';
+//import Paper from '@material-ui/core/Paper';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +45,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Dashboard() {
+  
+  const darkTheme = createMuiTheme({
+    palette: {
+      type: "dark",
+    },
+  });
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
@@ -177,7 +190,8 @@ export default function Dashboard() {
   const user = firebase.auth().currentUser;
 
   return (
-    <div>
+    <ThemeProvider theme={darkTheme}>
+      <section className="login-page">
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <Typography className={classes.title} variant="h5">
@@ -193,11 +207,14 @@ export default function Dashboard() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <input type="file" id="fileInput" onChange={handleFileSelect} />
-      <button onClick={uploadFileTask} disabled={isDisabled()}>
+
+      <Button variant="contained" component="label">Select File
+      <input type="file" id="fileInput" onChange={handleFileSelect} style={{display:"none"}} />
+      </Button>
+      <Button onClick={uploadFileTask} disabled={isDisabled()} variant="contained">
         Upload
-      </button>
-      <progress value={progress} max="100" />
+      </Button>
+      <LinearProgress variant="determinate" value={progress} />
 
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Class</InputLabel>
@@ -292,6 +309,7 @@ export default function Dashboard() {
         <MenuItem onClick={handleMenuClose}>Add another teacher</MenuItem>
         <MenuItem onClick={handleClickOpen}>Logout</MenuItem>
       </Menu>
-    </div>
+      </section>
+    </ThemeProvider>
   );
 }
