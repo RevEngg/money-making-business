@@ -38,7 +38,6 @@ const Login = (props) => {
 
   return (
     <section className="login-page">
-      <div className="page">
           <form id="login" method="get" action="login.php" className="form">
             <div >
             <img src={loginImage} alt="logo will be added here" className="image" />
@@ -59,7 +58,6 @@ const Login = (props) => {
             </Button>
             </ThemeProvider>
           </form>
-      </div>
     </section>
   );
 };

@@ -288,6 +288,9 @@ export default function Dashboard() {
       </Button>
       <br /><br />
       <LinearProgress variant="determinate" value={progress} />
+      </Paper>
+      </Grid>
+      </Grid>
 
       <Dialog
         open={open}
@@ -324,9 +327,7 @@ export default function Dashboard() {
         <MenuItem onClick={handleMenuClose}>Add another teacher</MenuItem>
         <MenuItem onClick={handleClickOpen}>Logout</MenuItem>
       </Menu>
-      </Paper>
-      </Grid>
-      </Grid>
+
       </section>
     </ThemeProvider>
   );
