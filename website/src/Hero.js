@@ -9,7 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, 
 createMuiTheme,
-ThemeProvider } from "@material-ui/core/styles";
+ThemeProvider} from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreIcon from "@material-ui/icons/MoreVert";
@@ -20,7 +20,8 @@ import MuiAlert from "@material-ui/lab/Alert";
 import Select from "@material-ui/core/Select";
 import firebase from "./fire";
 import LinearProgress from '@material-ui/core/LinearProgress';
-//import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -42,6 +43,12 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(2),
     minWidth: 150,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    backgroundColor: 'rgba(66, 62, 61, 0.7)',
   },
 }));
 
@@ -207,14 +214,16 @@ export default function Dashboard() {
           </IconButton>
         </Toolbar>
       </AppBar>
-
-      <Button variant="contained" component="label">Select File
+      <br/>
+    <Grid container direction="column"
+    justify="center"
+    alignItems="center">
+    <Grid item xs={10} sm={6} md={6} lg={3}>
+      <Paper className={classes.paper} variant="outlined">
+      <Button style={{borderRadius: 21}} variant="contained" component="label" color="primary">Select File
       <input type="file" id="fileInput" onChange={handleFileSelect} style={{display:"none"}} />
       </Button>
-      <Button onClick={uploadFileTask} disabled={isDisabled()} variant="contained">
-        Upload
-      </Button>
-      <LinearProgress variant="determinate" value={progress} />
+      <br/>
 
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label">Class</InputLabel>
@@ -273,6 +282,12 @@ export default function Dashboard() {
           <MenuItem value={"Lab"}>Lab</MenuItem>
         </Select>
       </FormControl>
+      <br/>
+      <Button onClick={uploadFileTask} disabled={isDisabled()} variant="contained" color="primary" style={{borderRadius: 21}}>
+        Upload
+      </Button>
+      <br /><br />
+      <LinearProgress variant="determinate" value={progress} />
 
       <Dialog
         open={open}
@@ -309,6 +324,9 @@ export default function Dashboard() {
         <MenuItem onClick={handleMenuClose}>Add another teacher</MenuItem>
         <MenuItem onClick={handleClickOpen}>Logout</MenuItem>
       </Menu>
+      </Paper>
+      </Grid>
+      </Grid>
       </section>
     </ThemeProvider>
   );
