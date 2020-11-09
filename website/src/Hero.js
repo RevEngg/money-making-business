@@ -280,6 +280,7 @@ export default function Dashboard() {
           <MenuItem value={"Question Papers"}>Question Papers</MenuItem>
           <MenuItem value={"Syllabus"}>Syllabus</MenuItem>
           <MenuItem value={"Lab"}>Lab</MenuItem>
+          <MenuItem value={"PPT"}>PPT</MenuItem>
         </Select>
       </FormControl>
       <br/>
