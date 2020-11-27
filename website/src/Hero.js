@@ -324,7 +324,7 @@ export default function Dashboard() {
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>Add another teacher</MenuItem>
+        <MenuItem onClick={handleMenuClose}>View All Files</MenuItem>
         <MenuItem onClick={handleClickOpen}>Logout</MenuItem>
       </Menu>
 
